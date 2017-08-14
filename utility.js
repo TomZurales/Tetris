@@ -7,7 +7,14 @@ const SQUIGLY_COLOR = "#79AE3D";
 const REVERSE_SQUIGLY_COLOR = "#E93D1E";
 const T_BLOCK_COLOR = "#943692";
 const SQUARE_COLOR = "#F1F000";
-const TIME_TO_LOCK = 300;
+const TIME_TO_LOCK = 500;
+const OFFSET = 3;
+var gameInterval;
+var tickSpeed = 1000;
+var minTickSpeed = 10;
+var numLevels = 2;
+var rowsToNextLevel = 2;
+var level = 1;
 
 
 function hasNoCollisions(board1, board2){
@@ -50,14 +57,14 @@ function draw(shown, piece){
   let context = canvas.getContext('2d');
 
   canvas.setAttribute("width", shown.board[0].length * SQUARE_SIZE);
-  canvas.setAttribute("height", shown.board.length * SQUARE_SIZE);
+  canvas.setAttribute("height", shown.board.length * SQUARE_SIZE - (OFFSET * SQUARE_SIZE));
 
 
-  for(let i = 0; i < combinedBoard.length; i++){
+  for(let i = OFFSET; i < combinedBoard.length; i++){
     for(let j = 0; j < combinedBoard[0].length; j++){
       context.fillStyle = combinedBoard[i][j];
       let startingX = j * SQUARE_SIZE;
-      let startingY = i * SQUARE_SIZE;
+      let startingY = (i - OFFSET) * SQUARE_SIZE;
       let endingX = startingX + SQUARE_SIZE;
       let endingY = startingY + SQUARE_SIZE;
       context.fillRect(startingX, startingY, endingX, endingY);
