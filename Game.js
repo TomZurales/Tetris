@@ -46,10 +46,31 @@ class Game{
           testBoard.clearBoard();
           this.currentPiece.rotateRight();
           testBoard.addPiece(this.currentPiece, this.currentLocation);
-          while(!hasNoCollisions(this.shownBoard, testBoard)){
+          if(!hasNoCollisions(this.shownBoard, testBoard)){
+            testBoard.clear();
             this.currentLocation[1] -= 1;
-            testBoard.clearBoard();
             testBoard.addPiece(this.currentPiece, this.currentLocation);
+          }
+          if(!hasNoCollisions(this.shownBoard, testBoard)){
+            testBoard.clear();
+            this.currentLocation[1] += 1;
+            this.currentLocation[0] -= 1;
+            testBoard.addPiece(this.currentPiece, this.currentLocation);
+          }
+          if(!hasNoCollisions(this.shownBoard, testBoard)){
+            testBoard.clear();
+            this.currentLocation[0] += 2;
+            testBoard.addPiece(this.currentPiece, this.currentLocation);
+          }
+          if(!hasNoCollisions(this.shownBoard, testBoard)){
+            testBoard.clear();
+            this.currentLocation[0] -= 1;
+            this.currentLocation[1] += 1;
+            testBoard.addPiece(this.currentPiece, this.currentLocation);
+          }
+          if(!hasNoCollisions(this.shownBoard, testBoard)){
+            this.currentPiece.rotateLeft();
+            this.currentLocation[1] -= 1;
           }
           this.pieceBoard.clearBoard();
           this.pieceBoard.addPiece(this.currentPiece, this.currentLocation);
@@ -59,21 +80,42 @@ class Game{
           draw(this.shownBoard, this.pieceBoard);
           break;
         case 90:
-          testBoard.clearBoard();
-          this.currentPiece.rotateLeft();
+        testBoard.clearBoard();
+        this.currentPiece.rotateLeft();
+        testBoard.addPiece(this.currentPiece, this.currentLocation);
+        if(!hasNoCollisions(this.shownBoard, testBoard)){
+          testBoard.clear();
+          this.currentLocation[1] -= 1;
           testBoard.addPiece(this.currentPiece, this.currentLocation);
-          while(!hasNoCollisions(this.shownBoard, testBoard)){
-            this.currentLocation[1] -= 1;
-            testBoard.clearBoard();
-            testBoard.addPiece(this.currentPiece, this.currentLocation);
-          }
-          this.pieceBoard.clearBoard();
-          this.pieceBoard.addPiece(this.currentPiece, this.currentLocation);
-          this.nextBoard.clearBoard();
-          this.nextBoard.addPiece(this.currentPiece, this.currentLocation);
-          this.nextBoard.moveDown();
-          draw(this.shownBoard, this.pieceBoard);
-          break;
+        }
+        if(!hasNoCollisions(this.shownBoard, testBoard)){
+          testBoard.clear();
+          this.currentLocation[1] += 1;
+          this.currentLocation[0] -= 1;
+          testBoard.addPiece(this.currentPiece, this.currentLocation);
+        }
+        if(!hasNoCollisions(this.shownBoard, testBoard)){
+          testBoard.clear();
+          this.currentLocation[0] += 2;
+          testBoard.addPiece(this.currentPiece, this.currentLocation);
+        }
+        if(!hasNoCollisions(this.shownBoard, testBoard)){
+          testBoard.clear();
+          this.currentLocation[0] -= 1;
+          this.currentLocation[1] += 1;
+          testBoard.addPiece(this.currentPiece, this.currentLocation);
+        }
+        if(!hasNoCollisions(this.shownBoard, testBoard)){
+          this.currentPiece.rotateLeft();
+          this.currentLocation[1] -= 1;
+        }
+        this.pieceBoard.clearBoard();
+        this.pieceBoard.addPiece(this.currentPiece, this.currentLocation);
+        this.nextBoard.clearBoard();
+        this.nextBoard.addPiece(this.currentPiece, this.currentLocation);
+        this.nextBoard.moveDown();
+        draw(this.shownBoard, this.pieceBoard);
+        break;
       }
     }.bind(this));
   }
@@ -90,7 +132,7 @@ class Game{
         let allFilled = true;
         for(let j = 0; j < this.shownBoard.board[i].length; j++){
           if(allFilled){
-            if(this.shownBoard.board[i][j] !== BACKGROUND_COLOR){
+            if(this.shownBoard.board[i][j] === BACKGROUND_COLOR){
               allFilled = false;
             }
           }
