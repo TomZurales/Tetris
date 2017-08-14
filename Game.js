@@ -53,6 +53,9 @@ class Game{
           }
           this.pieceBoard.clearBoard();
           this.pieceBoard.addPiece(this.currentPiece, this.currentLocation);
+          this.nextBoard.clearBoard();
+          this.nextBoard.addPiece(this.currentPiece, this.currentLocation);
+          this.nextBoard.moveDown();
           draw(this.shownBoard, this.pieceBoard);
           break;
         case 90:
@@ -66,6 +69,9 @@ class Game{
           }
           this.pieceBoard.clearBoard();
           this.pieceBoard.addPiece(this.currentPiece, this.currentLocation);
+          this.nextBoard.clearBoard();
+          this.nextBoard.addPiece(this.currentPiece, this.currentLocation);
+          this.nextBoard.moveDown();
           draw(this.shownBoard, this.pieceBoard);
           break;
       }
