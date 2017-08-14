@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tetris</title>
+  <script src="./utility.js"></script>
+  <script src="./Piece.js"></script>
+  <script src="./PieceBoard.js"></script>
+  <script src="./ShownBoard.js"></script>
+  <script src="./Game.js"></script>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    var game = new Game(10, 15);
+    draw(game.shownBoard, game.pieceBoard);
+    setInterval(game.tick.bind(game), 1000);
+  </script>
+</body>
