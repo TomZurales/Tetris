@@ -14,27 +14,27 @@ class Piece{
       break;
       case 1:
       this.type = "l-block";
-      this.pieceArr = [[L_BLOCK_COLOR, BACKGROUND_COLOR],
-      [L_BLOCK_COLOR, BACKGROUND_COLOR],
-      [L_BLOCK_COLOR, L_BLOCK_COLOR]];
+      this.pieceArr = [[BACKGROUND_COLOR, L_BLOCK_COLOR, BACKGROUND_COLOR],
+                      [BACKGROUND_COLOR, L_BLOCK_COLOR, BACKGROUND_COLOR],
+                      [BACKGROUND_COLOR, L_BLOCK_COLOR, L_BLOCK_COLOR]];
       break;
       case 2:
       this.type = "reverse-l-block";
-      this.pieceArr = [[BACKGROUND_COLOR, REVERSE_L_BLOCK_COLOR],
-      [BACKGROUND_COLOR, REVERSE_L_BLOCK_COLOR],
-      [REVERSE_L_BLOCK_COLOR, REVERSE_L_BLOCK_COLOR]];
+      this.pieceArr = [[BACKGROUND_COLOR, REVERSE_L_BLOCK_COLOR, BACKGROUND_COLOR],
+      [BACKGROUND_COLOR, REVERSE_L_BLOCK_COLOR, BACKGROUND_COLOR],
+      [REVERSE_L_BLOCK_COLOR, REVERSE_L_BLOCK_COLOR, BACKGROUND_COLOR]];
       break;
       case 3:
       this.type = "squigly";
-      this.pieceArr = [[BACKGROUND_COLOR, SQUIGLY_COLOR],
-      [SQUIGLY_COLOR, SQUIGLY_COLOR],
-      [SQUIGLY_COLOR, BACKGROUND_COLOR]];
+      this.pieceArr = [[BACKGROUND_COLOR, BACKGROUND_COLOR, SQUIGLY_COLOR],
+      [BACKGROUND_COLOR, SQUIGLY_COLOR, SQUIGLY_COLOR],
+      [BACKGROUND_COLOR, SQUIGLY_COLOR, BACKGROUND_COLOR]];
       break;
       case 4:
       this.type = "reverse-squigly";
-      this.pieceArr = [[REVERSE_SQUIGLY_COLOR, BACKGROUND_COLOR],
-      [REVERSE_SQUIGLY_COLOR, REVERSE_SQUIGLY_COLOR],
-      [BACKGROUND_COLOR, REVERSE_SQUIGLY_COLOR]];
+      this.pieceArr = [[BACKGROUND_COLOR, REVERSE_SQUIGLY_COLOR, BACKGROUND_COLOR],
+      [BACKGROUND_COLOR, REVERSE_SQUIGLY_COLOR, REVERSE_SQUIGLY_COLOR],
+      [BACKGROUND_COLOR, BACKGROUND_COLOR, REVERSE_SQUIGLY_COLOR]];
       break;
       case 5:
       this.type = "square";
@@ -43,9 +43,9 @@ class Piece{
       break;
       case 6:
       this.type = "t-block"
-      this.pieceArr = [[BACKGROUND_COLOR, T_BLOCK_COLOR],
-      [T_BLOCK_COLOR, T_BLOCK_COLOR],
-      [BACKGROUND_COLOR, T_BLOCK_COLOR]];
+      this.pieceArr = [[BACKGROUND_COLOR, T_BLOCK_COLOR, BACKGROUND_COLOR],
+      [T_BLOCK_COLOR, T_BLOCK_COLOR, BACKGROUND_COLOR],
+      [BACKGROUND_COLOR, T_BLOCK_COLOR, BACKGROUND_COLOR]];
       break;
     }
     this.center = this.pieceArr[0].length / 2;
