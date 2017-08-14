@@ -4,6 +4,7 @@ class Game{
     while(this.fullRow.length < width){
       this.fullRow.push(BACKGROUND_COLOR);
     }
+    this.timerActive = false;
     this.fullRow.join();
     this.ableToLock = true;
     this.shownBoard = new ShownBoard(width, height);
@@ -18,6 +19,8 @@ class Game{
     window.addEventListener('keydown', function(event){
       switch (event.keyCode) {
         case 37:
+        this.timerActive = false;
+        this.ableToLock = false;
           testBoard.clearBoard();
           testBoard.addPiece(this.currentPiece, [this.currentLocation[0] - 1, this.currentLocation[1]]);
           if(hasNoCollisions(this.shownBoard, testBoard)){
@@ -28,6 +31,8 @@ class Game{
           }
           break;
         case 39:
+        this.ableToLock = false;
+        this.timerActive = false;
           testBoard.clearBoard();
           testBoard.addPiece(this.currentPiece, [this.currentLocation[0] + 1, this.currentLocation[1]]);
           if(hasNoCollisions(this.shownBoard, testBoard)){
@@ -43,27 +48,29 @@ class Game{
           }
           break;
         case 88:
+        this.ableToLock = false;
+        this.timerActive = false;
           testBoard.clearBoard();
           this.currentPiece.rotateRight();
           testBoard.addPiece(this.currentPiece, this.currentLocation);
           if(!hasNoCollisions(this.shownBoard, testBoard)){
-            testBoard.clear();
+            testBoard.clearBoard();
             this.currentLocation[1] -= 1;
             testBoard.addPiece(this.currentPiece, this.currentLocation);
           }
           if(!hasNoCollisions(this.shownBoard, testBoard)){
-            testBoard.clear();
+            testBoard.clearBoard();
             this.currentLocation[1] += 1;
             this.currentLocation[0] -= 1;
             testBoard.addPiece(this.currentPiece, this.currentLocation);
           }
           if(!hasNoCollisions(this.shownBoard, testBoard)){
-            testBoard.clear();
+            testBoard.clearBoard();
             this.currentLocation[0] += 2;
             testBoard.addPiece(this.currentPiece, this.currentLocation);
           }
           if(!hasNoCollisions(this.shownBoard, testBoard)){
-            testBoard.clear();
+            testBoard.clearBoard();
             this.currentLocation[0] -= 1;
             this.currentLocation[1] += 1;
             testBoard.addPiece(this.currentPiece, this.currentLocation);
@@ -80,27 +87,29 @@ class Game{
           draw(this.shownBoard, this.pieceBoard);
           break;
         case 90:
+        this.ableToLock = false;
+        this.timerActive = false;
         testBoard.clearBoard();
         this.currentPiece.rotateLeft();
         testBoard.addPiece(this.currentPiece, this.currentLocation);
         if(!hasNoCollisions(this.shownBoard, testBoard)){
-          testBoard.clear();
+          testBoard.clearBoard();
           this.currentLocation[1] -= 1;
           testBoard.addPiece(this.currentPiece, this.currentLocation);
         }
         if(!hasNoCollisions(this.shownBoard, testBoard)){
-          testBoard.clear();
+          testBoard.clearBoard();
           this.currentLocation[1] += 1;
           this.currentLocation[0] -= 1;
           testBoard.addPiece(this.currentPiece, this.currentLocation);
         }
         if(!hasNoCollisions(this.shownBoard, testBoard)){
-          testBoard.clear();
+          testBoard.clearBoard();
           this.currentLocation[0] += 2;
           testBoard.addPiece(this.currentPiece, this.currentLocation);
         }
         if(!hasNoCollisions(this.shownBoard, testBoard)){
-          testBoard.clear();
+          testBoard.clearBoard();
           this.currentLocation[0] -= 1;
           this.currentLocation[1] += 1;
           testBoard.addPiece(this.currentPiece, this.currentLocation);
@@ -138,7 +147,6 @@ class Game{
           }
         }
         if(allFilled){
-          console.log("ROW FILLED");
           this.shownBoard.board.splice(i, 1);
           let newRow = [EDGE_COLOR];
           while(newRow.length < this.shownBoard.board[0].length - 1){
@@ -155,6 +163,15 @@ class Game{
       this.pieceBoard.addPiece(this.currentPiece, this.currentLocation);
       this.nextBoard.addPiece(this.currentPiece, this.currentLocation);
       this.nextBoard.moveDown();
+    }
+    else{
+      if(!this.ableToLock && !this.timerActive){
+        this.timerActive = true;
+        setTimeout(function(){
+          this.ableToLock = true;
+          this.timerActive = false;
+        }.bind(this), TIME_TO_LOCK);
+      }
     }
     draw(this.shownBoard, this.pieceBoard);
   }

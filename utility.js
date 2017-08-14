@@ -7,6 +7,7 @@ const SQUIGLY_COLOR = "#79AE3D";
 const REVERSE_SQUIGLY_COLOR = "#E93D1E";
 const T_BLOCK_COLOR = "#943692";
 const SQUARE_COLOR = "#F1F000";
+const TIME_TO_LOCK = 300;
 
 
 function hasNoCollisions(board1, board2){
