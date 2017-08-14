@@ -2,7 +2,7 @@ class Game{
   constructor(width, height){
     this.fullRow = [];
     while(this.fullRow.length < width){
-      this.fullRow.push(1);
+      this.fullRow.push(BACKGROUND_COLOR);
     }
     this.fullRow.join();
     this.ableToLock = true;
@@ -76,22 +76,28 @@ class Game{
     if(hasNoCollisions(this.shownBoard, this.nextBoard)){
       this.pieceBoard.moveDown();
       this.nextBoard.moveDown();
-      this.currentLocation[1] += 1
+      this.currentLocation[1] += 1;
     }
     else if(this.ableToLock){
       this.shownBoard.combine(combine(this.shownBoard, this.pieceBoard));
       for(let i = 0; i < this.shownBoard.board.length - 1; i++){
-        let allOnes = true;
+        let allFilled = true;
         for(let j = 0; j < this.shownBoard.board[i].length; j++){
-          if(allOnes){
-            if(this.shownBoard.board[i][j] === 0){
-              allOnes = false;
+          if(allFilled){
+            if(this.shownBoard.board[i][j] !== BACKGROUND_COLOR){
+              allFilled = false;
             }
           }
         }
-        if(allOnes){
+        if(allFilled){
+          console.log("ROW FILLED");
           this.shownBoard.board.splice(i, 1);
-          this.shownBoard.board.unshift([1, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+          let newRow = [EDGE_COLOR];
+          while(newRow.length < this.shownBoard.board[0].length - 1){
+            newRow.push(BACKGROUND_COLOR);
+          }
+          newRow.push(EDGE_COLOR);
+          this.shownBoard.board.unshift(newRow);
         }
       }
       this.pieceBoard.clearBoard();

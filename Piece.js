@@ -7,45 +7,45 @@ class Piece{
     switch(type){
       case 0:
       this.type = "line";
-      this.pieceArr = [[1],
-      [1],
-      [1],
-      [1]];
+      this.pieceArr = [[LINE_COLOR],
+      [LINE_COLOR],
+      [LINE_COLOR],
+      [LINE_COLOR]];
       break;
       case 1:
       this.type = "l-block";
-      this.pieceArr = [[1, 0],
-      [1, 0],
-      [1, 1]];
+      this.pieceArr = [[L_BLOCK_COLOR, BACKGROUND_COLOR],
+      [L_BLOCK_COLOR, BACKGROUND_COLOR],
+      [L_BLOCK_COLOR, L_BLOCK_COLOR]];
       break;
       case 2:
       this.type = "reverse-l-block";
-      this.pieceArr = [[0, 1],
-      [0, 1],
-      [1, 1]];
+      this.pieceArr = [[BACKGROUND_COLOR, REVERSE_L_BLOCK_COLOR],
+      [BACKGROUND_COLOR, REVERSE_L_BLOCK_COLOR],
+      [REVERSE_L_BLOCK_COLOR, REVERSE_L_BLOCK_COLOR]];
       break;
       case 3:
       this.type = "squigly";
-      this.pieceArr = [[0, 1],
-      [1, 1],
-      [1, 0]];
+      this.pieceArr = [[BACKGROUND_COLOR, SQUIGLY_COLOR],
+      [SQUIGLY_COLOR, SQUIGLY_COLOR],
+      [SQUIGLY_COLOR, BACKGROUND_COLOR]];
       break;
       case 4:
       this.type = "reverse-squigly";
-      this.pieceArr = [[1, 0],
-      [1, 1],
-      [0, 1]];
+      this.pieceArr = [[REVERSE_SQUIGLY_COLOR, BACKGROUND_COLOR],
+      [REVERSE_SQUIGLY_COLOR, REVERSE_SQUIGLY_COLOR],
+      [BACKGROUND_COLOR, REVERSE_SQUIGLY_COLOR]];
       break;
       case 5:
       this.type = "square";
-      this.pieceArr = [[1, 1],
-      [1, 1]];
+      this.pieceArr = [[SQUARE_COLOR, SQUARE_COLOR],
+      [SQUARE_COLOR, SQUARE_COLOR]];
       break;
       case 6:
       this.type = "t-block"
-      this.pieceArr = [[0, 1],
-      [1, 1],
-      [0, 1]];
+      this.pieceArr = [[BACKGROUND_COLOR, T_BLOCK_COLOR],
+      [T_BLOCK_COLOR, T_BLOCK_COLOR],
+      [BACKGROUND_COLOR, T_BLOCK_COLOR]];
       break;
     }
     this.center = this.pieceArr[0].length / 2;

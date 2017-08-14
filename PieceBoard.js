@@ -6,7 +6,7 @@ class PieceBoard{
     this.board = [];
     let newRow = [];
     for(var i = 0; i < width; i++){
-      newRow.push(0);
+      newRow.push(BACKGROUND_COLOR);
     }
     for(var j = 0; j < height; j++){
       this.board.push(newRow);
@@ -15,32 +15,32 @@ class PieceBoard{
 
   addPiece(pieceToAdd, locationArray){
     const pieceHeight = pieceToAdd.pieceArr.length;
-    let zeroArr = [];
+    let emptyArr = [];
     let newRows = [];
     let nextRow = [];
 
-    //fill zeroArr with 0s to correct length
+    //fill emptyArr with 0s to correct length
     for(let i = 0; i < this.width; i++){
-      zeroArr.push(0);
+      emptyArr.push(BACKGROUND_COLOR);
     }
 
     //Put 0s on top of the new array until the desired height is reached
     for(let i = 0; i < locationArray[1]; i++){
-      newRows.push(zeroArr);
+      newRows.push(emptyArr);
     }
 
     for(let i = 0; i < pieceHeight; i++){
       nextRow = [];
       //put zeros at the begining of the new rows until the desired distance is reached
       for(let widthZeros = 0; widthZeros < locationArray[0]; widthZeros++){
-        nextRow.push(0);
+        nextRow.push(BACKGROUND_COLOR);
       }
       //add the piece row
       pieceToAdd.pieceArr[i].forEach(function(e){
         nextRow.push(e);
       });
       while(nextRow.length < this.width){
-        nextRow.push(0);
+        nextRow.push(BACKGROUND_COLOR);
       }
       newRows.push(nextRow);
     }
@@ -51,38 +51,34 @@ class PieceBoard{
   }
   moveRight(){
     this.board.forEach(function(e){
-      if(e.includes(1)){
-        e.unshift(0);
-        e.pop();
-      }
+      e.unshift(BACKGROUND_COLOR);
+      e.pop();
     });
   }
 
   moveLeft(){
     this.board.forEach(function(e){
-      if(e.includes(1)){
-        e.push(0);
-        e.shift();
-      }
+      e.push(BACKGROUND_COLOR);
+      e.shift();
     });
   }
 
   moveDown(){
-    var zeroArr = [];
+    var emptyArr = [];
     for(let i = 0; i < this.width; i++){
-      zeroArr.push(0);
+      emptyArr.push(BACKGROUND_COLOR);
     }
-    this.board.unshift(zeroArr);
+    this.board.unshift(emptyArr);
     this.board.pop();
   }
 
   clearBoard(){
-    var zeroArr = [];
+    var emptyArr = [];
     for(var i = 0; i < this.width; i++){
-      zeroArr.push(0);
+      emptyArr.push(BACKGROUND_COLOR);
     }
     for(var i = 0; i < this.height; i++){
-      this.board.unshift(zeroArr);
+      this.board.unshift(emptyArr);
       this.board.pop();
     }
 

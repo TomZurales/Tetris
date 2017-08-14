@@ -1,18 +1,17 @@
 class ShownBoard{
   constructor(width, height){
     this.board = [];
-    let newRow = [];
-    newRow.push(1);
+    let newRow = [EDGE_COLOR];
     for(let i = 0; i < width - 2; i++){
-      newRow.push(0);
+      newRow.push(BACKGROUND_COLOR);
     }
-    newRow.push(1);
+    newRow.push(EDGE_COLOR);
     for(let i = 0; i < height - 1; i++){
       this.board.push(newRow);
     }
     newRow = [];
     for(let i = 0; i < width; i++){
-      newRow.push(1);
+      newRow.push(EDGE_COLOR);
     }
     this.board.push(newRow);
   }
