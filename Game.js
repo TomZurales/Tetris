@@ -35,10 +35,16 @@ class Game{
   }
 
   lock(shown, piece){
-    shown.combine(piece);
-    this.shownBoard.clearFullRows();
-    this.piece = new Piece(Math.floor(Math.random() * 7));
-    piece.newPiece(this.piece);
+    if(this.noCollisions(shown, piece) && this.rowEmpty(shown.board[OFFSET - 1])){
+      shown.combine(piece);
+      this.shownBoard.clearFullRows();
+      this.piece = new Piece(Math.floor(Math.random() * 7));
+      piece.newPiece(this.piece);
+    }
+    else{
+      console.log("Game over");
+      this.gameOver();
+    }
   }
 
   tickFunction(){
@@ -55,5 +61,30 @@ class Game{
     }
     clearInterval(tick);
     tick = setInterval(this.tickFunction.bind(this), tickSpeed);
+  }
+
+  noCollisions(shown, piece){
+    for(let i = 0; i < shown.board.length; i++){
+      for(let j = 0; j < shown.board[0].length; j++){
+        if(shown.board[i][j] !== BACKGROUND_COLOR && piece.board[i][j] !== BACKGROUND_COLOR){
+          console.log("OH NO At", i, j);
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  rowEmpty(arr){
+    arr.forEach(function(e){
+      if(e !== BACKGROUND_COLOR){
+        return false;
+      }
+    });
+    return true;
+  }
+
+  gameOver(){
+    clearInterval(tick);
   }
 }
