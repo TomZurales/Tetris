@@ -1,5 +1,4 @@
 const BACKGROUND_COLOR = "#DDDDDD";
-const EDGE_COLOR = "#222222";
 const LINE_COLOR = "#51E1FC";
 const L_BLOCK_COLOR = "#F69230";
 const REVERSE_L_BLOCK_COLOR = "#F16EB9";
@@ -7,28 +6,52 @@ const SQUIGLY_COLOR = "#79AE3D";
 const REVERSE_SQUIGLY_COLOR = "#E93D1E";
 const T_BLOCK_COLOR = "#943692";
 const SQUARE_COLOR = "#F1F000";
-const TIME_TO_LOCK = 500;
+const TIME_TO_LOCK = 400;
 const OFFSET = 3;
-var gameInterval;
-var tickSpeed = 1000;
-var minTickSpeed = 10;
-var numLevels = 2;
-var rowsToNextLevel = 2;
+
+var tick;
+var tickSpeed = 500;
+var minTickSpeed = 100;
+var numLevels = 1;
+var rowsToLevelUp = 2;
+var remainingRows = 2;
 var level = 1;
+var speedIncrease = (tickSpeed - minTickSpeed) / numLevels;
 
-
-function hasNoCollisions(board1, board2){
-  let noCollisions = true;
-  for(var i = 0; i < board1.board.length; i++){
-    for(var j = 0; j < board1.board[0].length; j++){
-      if(noCollisions){
-        if(board1.board[i][j] !== BACKGROUND_COLOR && board2.board[i][j] !== BACKGROUND_COLOR){
-          noCollisions = false;
-        }
+function handleInput(event){
+  switch (event.keyCode) {
+    case 37:  //LEFT ARROW: MOVE LEFT
+      clearTimeout(this.lockTimer);
+      this.timerOn = false;
+      this.pieceBoard.moveLeft(this.shownBoard);
+      this.draw(this.shownBoard, this.pieceBoard);
+      break;
+    case 39:
+      clearTimeout(this.lockTimer);
+      this.timerOn = false;
+      this.pieceBoard.moveRight(this.shownBoard);
+      this.draw(this.shownBoard, this.pieceBoard);
+      break;
+    case 88:
+      clearTimeout(this.lockTimer);
+      this.timerOn = false;
+      this.pieceBoard.rotatePiece(this.piece.rotateRight(), this.shownBoard);
+      this.draw(this.shownBoard, this.pieceBoard);
+      break;
+    case 90:
+      clearTimeout(this.lockTimer);
+      this.timerOn = false;
+      this.pieceBoard.rotatePiece(this.piece.rotateLeft(), this.shownBoard);
+      this.draw(this.shownBoard, this.pieceBoard);
+      break;
+    case 40:
+      clearTimeout(this.lockTimer);
+      this.timerOn = false;
+      while(this.pieceBoard.moveDown(this.shownBoard)){
       }
-    }
+      this.draw(this.shownBoard, this.pieceBoard);
+      break;
   }
-  return noCollisions;
 }
 
 function combine(shown, piece){
@@ -47,27 +70,4 @@ function combine(shown, piece){
     combinedBoard.push(newRow);
   }
   return combinedBoard;
-}
-
-function draw(shown, piece){
-  const SQUARE_SIZE = 20;
-
-  let combinedBoard = combine(shown, piece);
-  let canvas = document.getElementById('canvas');
-  let context = canvas.getContext('2d');
-
-  canvas.setAttribute("width", shown.board[0].length * SQUARE_SIZE);
-  canvas.setAttribute("height", shown.board.length * SQUARE_SIZE - (OFFSET * SQUARE_SIZE));
-
-
-  for(let i = OFFSET; i < combinedBoard.length; i++){
-    for(let j = 0; j < combinedBoard[0].length; j++){
-      context.fillStyle = combinedBoard[i][j];
-      let startingX = j * SQUARE_SIZE;
-      let startingY = (i - OFFSET) * SQUARE_SIZE;
-      let endingX = startingX + SQUARE_SIZE;
-      let endingY = startingY + SQUARE_SIZE;
-      context.fillRect(startingX, startingY, endingX, endingY);
-    }
-  }
 }
