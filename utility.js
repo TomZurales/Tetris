@@ -10,11 +10,11 @@ const TIME_TO_LOCK = 400;
 const OFFSET = 3;
 
 var tick;
-var tickSpeed = 500;
+var tickSpeed = 1000;
 var minTickSpeed = 100;
-var numLevels = 1;
-var rowsToLevelUp = 2;
-var remainingRows = 2;
+var numLevels = 11;
+var rowsToLevelUp = 10;
+var remainingRows = 10;
 var level = 1;
 var speedIncrease = (tickSpeed - minTickSpeed) / numLevels;
 
