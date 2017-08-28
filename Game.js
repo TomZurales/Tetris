@@ -48,8 +48,8 @@ class Game{
   }
 
   tickFunction(){
-    this.pieceBoard.moveDown(this.shownBoard);
     this.draw(this.shownBoard, this.pieceBoard);
+    this.pieceBoard.moveDown(this.shownBoard);
     if(this.pieceBoard.atBottom){
       if(!this.timerOn){
         this.timerOn = true;
